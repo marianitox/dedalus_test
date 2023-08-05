@@ -1,1 +1,38 @@
-<p>patient-list works!</p>
+<!-- <mat-list role="list">
+  <mat-list-item *ngFor="let patient of patients" role="listitem">
+    <h4 style="color: red" matLine>{{ patient.resource.name[0].given.join(' ') }} {{ patient.resource.name[0].family }}</h4>
+    <button mat-icon-button (click)="patientDetails(patient.resource.id)"> More Info </button>
+  </mat-list-item>
+</mat-list> -->
+
+
+<table mat-table [dataSource]="patients" class="mat-elevation-z8">
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.resource.name[0].given.join(' ')}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.resource.name[0].family}} </td>
+  </ng-container>
+
+ 
+  <!-- Birth Date -->
+  <ng-container matColumnDef="birthDate">
+    <th mat-header-cell *matHeaderCellDef> Birth Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.resource.birthDate || ''}} </td>
+  </ng-container>
+
+  <!-- Gender -->
+  <ng-container matColumnDef="gender">
+    <th mat-header-cell *matHeaderCellDef> Gender </th>
+    <td mat-cell *matCellDef="let element"> {{element.resource.gender || ''}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getPatientDetails(row.resource.id)"></tr>
+</table>
