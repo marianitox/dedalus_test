@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PatientService } from 'src/app/shared/services/patient.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class PatientListComponent implements OnInit {
   patients: any[] = [];
 
   constructor(
-    private patientService: PatientService
+    private router: Router,
+    private patientService: PatientService,
   ) {}
 
   async ngOnInit() {
@@ -19,5 +21,7 @@ export class PatientListComponent implements OnInit {
     this.patients = patientsBundle.entry
   }
 
-  getPatientDetails(id: string) {}
+  getPatientDetails(id: string) {
+    this.router.navigate(['/detail', id]);
+  }
 }

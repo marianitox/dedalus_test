@@ -15,7 +15,7 @@ const routes: Routes = [
     component: PatientListComponent
   },
   {
-    path: PAGES.detail,
+    path: `${PAGES.detail}/:id`,
     component: PatientDetailsComponent
   },
   {

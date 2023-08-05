@@ -7,7 +7,8 @@ import { PatientListComponent } from './pages/patient-list/patient-list.componen
 import { PatientDetailsComponent } from './pages/patient-details/patient-details.component';
 
 import { MatButtonModule } from '@angular/material/button';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {MatTableModule} from '@angular/material/table';
     AppRoutingModule,
     MatButtonModule,
     MatTableModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

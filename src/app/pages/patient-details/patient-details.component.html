@@ -1,1 +1,17 @@
-<p>patient-details works!</p>
+<div *ngIf="patient">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ patient.name[0].given.join(' ') }} {{ patient.name[0].family }}</mat-card-title>
+      <mat-card-subtitle>Gender: {{ patient.gender }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Phone Number: {{ patient.telecom[0].value }}</p>
+      <p>Birthdate: {{ patient.birthDate }}</p>
+      <p>Address: {{ patient.address[0].line.join(' ')}} {{patient.address[0].city}}</p>
+      <p>Postal Code: {{ patient.address[0].postalCode}}</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button (click)="returnToList()">Return</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
