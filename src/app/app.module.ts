@@ -9,6 +9,7 @@ import { PatientDetailsComponent } from './pages/patient-details/patient-details
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
     PatientDetailsComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     MatButtonModule,

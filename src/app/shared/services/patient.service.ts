@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
-import { FhirClient } from "../fhir-client/fhir-client";
+import { HttpClient } from '@angular/common/http';
+import { fhirBaseUrl } from "../constants";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +9,16 @@ import { FhirClient } from "../fhir-client/fhir-client";
 export class PatientService { 
 
   constructor(
-    private fhirClient: FhirClient
+    private http: HttpClient,
   ) {}
 
-  getAllPatients(): Promise<any> {
-    return this.fhirClient.getFhirClient().request('Patient')
+  getAllPatients(): Observable<any> {
+    const url = `${fhirBaseUrl}/Patient`;
+    return this.http.get(url);
   }
 
-  getPatientDetail(id: string): Promise<any> {
-    const endpoint = `Patient/${id}`;
-    return this.fhirClient.getFhirClient().request(endpoint)
+  getPatientDetail(id: string): Observable<any> {
+    const url = `${fhirBaseUrl}/Patient/${id}`;
+    return this.http.get(url);
   }
 }

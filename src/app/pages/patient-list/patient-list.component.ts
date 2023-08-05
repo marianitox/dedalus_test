@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PatientService } from 'src/app/shared/services/patient.service';
+import { Patient } from 'src/app/shared/models/patient.model';
+import { AclPatientService } from 'src/app/shared/services/acl-patient.service';
 
 @Component({
   selector: 'app-patient-list',
@@ -9,16 +10,22 @@ import { PatientService } from 'src/app/shared/services/patient.service';
 })
 export class PatientListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'lastName', 'birthDate', 'gender'];
-  patients: any[] = [];
+  patients: Patient[] = [];
 
   constructor(
     private router: Router,
-    private patientService: PatientService,
+    private aclPatientService: AclPatientService,
   ) {}
 
   async ngOnInit() {
-    const patientsBundle = await this.patientService.getAllPatients()
-    this.patients = patientsBundle.entry
+    this.aclPatientService.getAclPatients().subscribe(
+      patients => {
+        this.patients = patients
+      },
+      error => {
+        console.error("Error on fetching all patients" + error)
+      }
+    )
   }
 
   getPatientDetails(id: string) {

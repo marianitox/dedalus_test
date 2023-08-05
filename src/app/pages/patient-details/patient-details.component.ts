@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PatientService } from 'src/app/shared/services/patient.service';
+import { AclPatientService } from 'src/app/shared/services/acl-patient.service';
 
 @Component({
   selector: 'app-patient-details',
@@ -14,13 +14,17 @@ export class PatientDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private patientService: PatientService,
+    private aclPatientsService: AclPatientService,
   ) {}
 
   async ngOnInit() {
     this.patientId = this.activatedRoute.snapshot.paramMap.get('id') || '';
-    this.patient = await this.patientService.getPatientDetail(this.patientId)
-    console.log(this.patient)
+    this.aclPatientsService.getAclPatientDetails(this.patientId).subscribe(
+      patient => {
+        this.patient = patient
+      },
+      error => console.error("Error fetching patient detalis" + error)
+    )
   }
 
   returnToList() {
